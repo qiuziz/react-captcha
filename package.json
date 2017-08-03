@@ -1,0 +1,40 @@
+{
+  "name": "react-captcha",
+  "version": "1.0.0",
+  "description": "a captcha component of reactjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --config webpack-dev.config.js",
+    "build": "webpack --config webpack-build.config.js --progress --profile --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qiuziz/react-captcha.git"
+  },
+  "keywords": [
+    "captcha",
+    "react-captcha"
+  ],
+  "author": "qiuz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qiuziz/react-captcha/issues"
+  },
+  "homepage": "https://github.com/qiuziz/react-captcha#readme",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.16",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^2.30.1",
+    "react-hot-loader": "^1.3.1",
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1"
+  }
+}
