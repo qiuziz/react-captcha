@@ -1,6 +1,7 @@
 // webpack.config.js
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = {
   //程序入口.
@@ -56,6 +57,9 @@ const config = {
         NODE_ENV: JSON.stringify('development')
       }
     }),
+    new HtmlWebpackPlugin({
+        template: './index.html' // 模版文件
+    })
   ]
 };
 //模块导出
