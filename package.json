@@ -1,8 +1,8 @@
 {
   "name": "react-captcha-qiuz",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "a captcha component of reactjs",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack-dev.config.js",
     "build": "webpack --config webpack-build.config.js --progress --profile --colors"

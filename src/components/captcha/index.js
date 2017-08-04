@@ -2,10 +2,9 @@
  * @Author: qiuziz
  * @Date: 2017-08-03 17:44:46
  * @Last Modified by: qiuziz
- * @Last Modified time: 2017-08-04 13:54:08
+ * @Last Modified time: 2017-08-04 16:24:30
  */
 
-import './index.scss';
 import React from 'react';
 import { propTypes, defaultProps } from 'prop-types';
 import { OPTIONS, CODES } from './config';
@@ -129,3 +128,4 @@ class Captcha extends React.Component {
     onClick: () => {},
     codes: CODES
   };
+

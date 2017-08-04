@@ -1,71 +1,66 @@
 // webpack.config.js
 const webpack = require('webpack');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');//webpack插件，用于清除目录文件
-const config = {
+module.exports = {
   //程序入口.
-  entry: [
-    './src/components/captcha/index.js'
-  ],
+  entry: {
+    index: ['./src/components/captcha/index.js']
+  },
   output: {
-    filename: 'captcha.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: '[name].js',
+    path: path.resolve(path.resolve(__dirname), 'dist'),
+    library: ['captcha'],
+    libraryTarget: 'umd'
+  },
+  externals: {
+    'react': 'react',
+    'react-dom': 'react-dom'
   },
   // devtool: 'source-map',
   // webpack 的主目录.
-  context: __dirname,
-  devServer: {
-    // 静态文件位置
-    contentBase: path.join(__dirname, '/'),
-  },
   module: {
     rules: [
       //配置 js 后缀的文件，应该采用哪种加载器.
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
             query: {
-              // presets: ['es2015', 'react'],
+              presets: ['es2015', 'react'],
               cacheDirectory: true
             }
           }
+        ],
+        include: [
+          path.join(__dirname, 'src/components')
         ]
-      },
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: ['css-loader']
-        }),
-      },
-      {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: ['css-loader', 'sass-loader']
-        })
       }
     ]
   },
+  // 其他解决方案配置
+	resolve: {
+        extensions: ['.js', '.jsx', '.less', '.css'] //后缀名自动补全
+    },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
+   
     new CleanPlugin(['dist']),
+  
+    //用来优化生成的代码 chunk,合并相同的代码
+    new webpack.optimize.AggressiveMergingPlugin(),
+
+    //用来保证编译过程不出错
+    new webpack.NoEmitOnErrorsPlugin(),
+    // Uglify 加密压缩源代码
     new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      compress: {
-        warnings: false,
-      }
+        output: {
+            comments: false, // 是否保留代码格式和所有注释
+        },
+        compress: {
+            warnings: false, // 删除没有用的代码时是否发出警告
+            drop_console: true, // 是否删除所有的console
+        },
     }),
-    new ExtractTextPlugin('[name]-[hash].css')
   ]
 };
-//模块导出
-module.exports = config;
