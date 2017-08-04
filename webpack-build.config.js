@@ -2,12 +2,11 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');//webpack插件，用于清除目录文件
 const config = {
   //程序入口.
   entry: [
-    './src/index.js'
+    './src/components/captcha/index.js'
   ],
   output: {
     filename: 'bundle-[hash].js',
@@ -57,10 +56,7 @@ const config = {
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
-    }),
-    new HtmlWebpackPlugin({
-        template: './index.html' // 模版文件
-    }),
+    })
     new CleanPlugin(['dist']),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,

@@ -57,6 +57,7 @@ const config = {
         NODE_ENV: JSON.stringify('development')
       }
     }),
+    new ExtractTextPlugin("styles.css"),
     new HtmlWebpackPlugin({
         template: './index.html' // 模版文件
     })
