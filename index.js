@@ -1,3 +1,3 @@
-import Captcha from './src/components/captcha';
+import Captcha from './dist/captcha';
 
 exports.Captcha = Captcha;

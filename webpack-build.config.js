@@ -9,7 +9,7 @@ const config = {
     './src/components/captcha/index.js'
   ],
   output: {
-    filename: 'bundle-[hash].js',
+    filename: 'captcha.js',
     path: path.resolve(__dirname, 'dist')
   },
   // devtool: 'source-map',
@@ -56,7 +56,7 @@ const config = {
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
-    })
+    }),
     new CleanPlugin(['dist']),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
