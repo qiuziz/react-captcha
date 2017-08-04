@@ -1,6 +1,6 @@
 {
-  "name": "raact-captcha-qiuz",
-  "version": "1.0.0",
+  "name": "react-captcha",
+  "version": "1.0.2",
   "description": "a captcha component of reactjs",
   "main": "index.js",
   "scripts": {
