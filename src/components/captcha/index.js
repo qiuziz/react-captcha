@@ -2,7 +2,7 @@
  * @Author: qiuziz
  * @Date: 2017-08-03 17:44:46
  * @Last Modified by: qiuziz
- * @Last Modified time: 2017-08-04 16:24:30
+ * @Last Modified time: 2017-08-07 11:08:38
  */
 
 import React from 'react';
@@ -34,12 +34,17 @@ class Captcha extends React.Component {
 
   createCodes() {
     const { length, codes } = this.props;
-    let result = [];
+    let result = [], lines = [];
     for(let i = 0; i < length; i++) {
       result.push({code: codes[this.random(0, codes.length - 1)], style: this.codeStyle(i)});
     }
+    for(let i = 0; i < OPTIONS.lines; i++) {
+      lines.push({style: this.createLines()});
+    }
 
-    this.setState({ result });
+    this.setState({ result, lines }, () => {
+      this.onChange();
+    });
   }
 
   codeStyle(i) {
@@ -82,10 +87,18 @@ class Captcha extends React.Component {
     }
   }
 
+  onChange() {
+    const { result } = this.state;
+    let code = '';
+    result.map(item => {
+       code += item.code;
+    })
+    this.props.onChange(code);
+  }
+
 
 	render() {
-    const { result } = this.state;
-    const lines = new Array(OPTIONS.lines).join(0).split('');
+    const { result, lines } = this.state;
     const style = Object.assign({}, this.state.style, this.props.style);
 		return (
 			<div style={style} onClick={() => this.createCodes()}>
@@ -95,8 +108,8 @@ class Captcha extends React.Component {
           })
         }
         { 
-          lines.map((item, index) => {
-            return  <div key={index} style={this.createLines()} />
+          lines && lines.map((item, index) => {
+            return  <div key={index} style={item.style} />
           })
         }
       </div>
@@ -109,7 +122,7 @@ class Captcha extends React.Component {
 		width: React.PropTypes.string,
 		style: React.PropTypes.object,
 		length: React.PropTypes.number,
-    onClick: React.PropTypes.func,
+    onChange: React.PropTypes.func,
     codes: React.PropTypes.array
 	};
 
@@ -125,7 +138,7 @@ class Captcha extends React.Component {
       userSelect: 'none'
     },
     length: 4,
-    onClick: () => {},
+    onChange: () => {},
     codes: CODES
   };
 
